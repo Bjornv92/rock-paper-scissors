@@ -13,7 +13,8 @@
         <h2>Player Score:</h2>
         <p id="playerScore">0</p>
 
-        <input id="startButton" type="button" value="start">
+        <input id="startButton" type="button" value="start" onclick="fullGame()">
+        <input id="resetButton" type="button" value="reset" onclick="resetScore()">
 
         <script>
             //Computer 'choosing' Rock, Paper or Scissors
@@ -46,6 +47,7 @@
 
                 //Comparison
                 if (player === computer) {
+                    return "It's a draw!";
                 } else if ((player === "rock" && computer === "scissors")
                     || (player === "paper" && computer === "rock")
                     || (player === "scissors" && computer === "paper")) {
@@ -57,6 +59,14 @@
                     }
             };
 
+            //Resetting the score
+            function resetScore() {
+                computerScore = 0;
+                playerScore = 0;
+                document.getElementById("computerScore").innerHTML = computerScore;
+                document.getElementById("playerScore").innerHTML = playerScore;
+            }
+
             //5 Rounds
             function fullGame() {
                 for(i = 1; i <= 5; i++) {
@@ -64,6 +74,8 @@
                     computer = computerPlay();
                     console.log (playRound(player, computer));
                 }
+                document.getElementById("computerScore").innerHTML = computerScore;
+                document.getElementById("playerScore").innerHTML = playerScore;
             }
         
             </script>
