@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock-Paper-Scissors</title>
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body>
+        <h1>Rock-Paper-Scissors</h1>
+        <h2>Computer Score:</h2>
+        <p id="computerScore">0</p>
+
+        <h2>Player Score:</h2>
+        <p id="playerScore">0</p>
+
+        <input id="startButton" type="button" value="start">
+
+        <script>
+            //Computer 'choosing' Rock, Paper or Scissors
+            function computerPlay() {
+                let num = Math.random();
+                num = Math.round(num*100)/100;
+                
+                if (num < 0.34) {
+                    return "rock";
+                } else if (num < 0.67) {
+                    return "paper";
+                } else {
+                    return "scissors";
+                }
+            }
+            
+            //Set the global Score Variables
+            let playerScore = 0;
+            let computerScore = 0;
+            
+            //Play one round
+            function playRound() {
+
+                player = player.toLowerCase();
+
+                //Input Check
+                if (player !== "scissors" && player !== "rock" && player !== "paper") {
+                    alert ("Please use Rock, Paper or Scissors as input only!");
+                }
+
+                //Comparison
+                if (player === computer) {
+                } else if ((player === "rock" && computer === "scissors")
+                    || (player === "paper" && computer === "rock")
+                    || (player === "scissors" && computer === "paper")) {
+                        playerScore ++;
+                        return "You win!";
+                    } else {
+                        computerScore ++;
+                        return "You lose!";
+                    }
+            };
+
+            //5 Rounds
+            function fullGame() {
+                for(i = 1; i <= 5; i++) {
+                    player = prompt("Rock, paper or scissors?");
+                    computer = computerPlay();
+                    console.log (playRound(player, computer));
+                }
+            }
+        
+            </script>
+    </body>
+</html>
