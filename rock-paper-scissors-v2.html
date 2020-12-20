@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock-Paper-Scissors</title>
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body>
+        <h1>Rock-Paper-Scissors</h1>
+        <div id="results">
+            <h2>Computer Score:</h2>
+            <p id="computerScore">0</p>   
+            <h2>Player Score:</h2>
+            <p id="playerScore">0</p>
+        </div>
+
+        <input class="choiceButton" type="button" value="rock">
+        <input class="choiceButton" type="button" value="paper">
+        <input class="choiceButton" type="button" value="scissors">
+
+        <br>
+
+        <input id="resetButton" type="button" value="reset">
+
+        <script>
+            //Computer 'choosing' Rock, Paper or Scissors
+            function computerPlay() {
+                let num = Math.random();
+                num = Math.round(num*100)/100;
+                
+                if (num < 0.34) {
+                    return "rock";
+                } else if (num < 0.67) {
+                    return "paper";
+                } else {
+                    return "scissors";
+                }
+            }
+            
+            //Set the global Score Variables
+            let playerScore = 0;
+            let computerScore = 0;
+            
+            //Play one round
+            function playRound() {
+
+                player = this.value;
+                computer = computerPlay();
+
+
+                //Comparison
+                if (player === computer) {
+                    console.log("DRAW");
+                } else if ((player === "rock" && computer === "scissors")
+                    || (player === "paper" && computer === "rock")
+                    || (player === "scissors" && computer === "paper")) {
+                        playerScore ++;
+                        document.getElementById("playerScore").innerHTML = playerScore; 
+                        console.log("WIN");
+                    } else {
+                        computerScore ++;
+                        document.getElementById("computerScore").innerHTML = computerScore;
+                        console.log("LOSS")
+                    }
+
+                if (playerScore === 5) {
+                    alert("You Win! Resetting Scores");
+                    resetScore();
+                } else if (computerScore === 5) {
+                    alert("Computer wins! Resetting Scores");
+                    resetScore();
+                }
+            };
+
+            //Resetting the score
+            function resetScore() {
+                computerScore = 0;
+                playerScore = 0;
+                document.getElementById("computerScore").innerHTML = computerScore;
+                document.getElementById("playerScore").innerHTML = playerScore;
+            };
+
+            document.getElementById("resetButton").addEventListener("click", resetScore);
+
+            document.querySelectorAll(".choiceButton").forEach(btn => {
+                btn.addEventListener("click", playRound);
+            });
+
+            /* ARROW FUNCTION WRITTEN OUT. USE MORE ARROW FUNCTIONS!!
+            document.querySelectorAll(".choiceButton").forEach(function(btn) {
+                return btn.addEventListener("click", playRound)
+            }) */
+                    
+            </script>
+    </body>
+</html>
